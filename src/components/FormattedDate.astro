@@ -1,17 +1,13 @@
 ---
-interface Props {
-	date: Date;
-}
-
 const { date } = Astro.props;
+
+// Allow undefined / null without crashing
+const d = date ? new Date(date) : null;
+
+const formatted = d
+  ? d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+  : "";
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
-</time>
+{d ? <time datetime={d.toISOString()}>{formatted}</time> : null}
+

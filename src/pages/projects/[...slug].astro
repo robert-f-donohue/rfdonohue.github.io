@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+const { Content } = await p.render();
+---
+
+<SiteLayout title={p.data.title} description={p.data.description}>
+  <h1 class="text-3xl font-bold">{p.data.title}</h1>
+  <p class="mt-2 text-base opacity-80">{p.data.description}</p>
+
+  {p.data.highlights?.length ? (
+    <>
+      <h2 class="mt-8 text-xl font-semibold">Highlights</h2>
+      <ul class="mt-3 list-disc pl-6">
+        {p.data.highlights.map((h) => <li>{h}</li>)}
+      </ul>
+    </>
+  ) : null}
+
+  <div class="mt-8">
+    <Content />
+  </div>
+
+  <hr class="my-10" />
+  <div class="text-sm">
+    {p.data.website ? <><a href={p.data.website} target="_blank">Website</a>{" · "}</> : null}
+    {p.data.writeup ? <><a href={p.data.writeup} target="_blank">Write-up</a>{" · "}</> : null}
+    {p.data.demo ? <><a href={p.data.demo} target="_blank">Demo</a>{" · "}</> : null}
+    {p.data.paper ? <><a href={p.data.paper} target="_blank">Paper</a>{" · "}</> : null}
+    {p.data.slides ? <><a href={p.data.slides} target="_blank">Slides</a></> : null}
+  </div>
+</SiteLayout>
