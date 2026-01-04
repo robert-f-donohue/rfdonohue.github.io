@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -16,20 +16,20 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v5
-      
+
       - name: Install, build, and upload your site
         uses: withastro/action@v5
-        with:
-          path: .
-          node-version: 24
+        # with:
+        #   path: . # optional
+        #   node-version: 24 # optional (defaults to 22)
 
-deploy:
-  needs: build
-  runs-on: ubuntu-latest
-  environment:
-    name: github-pages
-    url: ${{ steps.deployment.outputs.page_url }}
-  steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
