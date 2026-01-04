@@ -22,9 +22,10 @@ const projects = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date().optional(),
 
+      category: z.enum(["academic", "startup"]).default("academic"),
+
       status: z.enum(["active", "completed", "paused"]).default("active"),
       tags: z.array(z.string()).default([]),
-
       highlights: z.array(z.string()).default([]),
 
       website: z.string().url().optional(),
@@ -33,7 +34,6 @@ const projects = defineCollection({
       paper: z.string().url().optional(),
       slides: z.string().url().optional(),
 
-      // optional for later (lets you do hero images for project cards)
       heroImage: image().optional(),
     }),
 });

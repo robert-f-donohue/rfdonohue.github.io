@@ -1,6 +1,7 @@
 ---
 title: "Discrete-Time Hazard Modeling — US Senate Toy Example"
 description: "A toy example showing discrete-time hazard modeling concepts for incumbent defeat risk over an election cycle."
+category: academic
 status: active
 tags: ["Hazard Models", "Elections", "Discrete Time", "Bayesian Modeling", "Big Data"]
 highlights:

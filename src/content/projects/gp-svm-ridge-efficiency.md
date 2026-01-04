@@ -1,6 +1,7 @@
 ---
 title: "GP vs SVM vs Ridge — Sample Efficiency vs Compute"
 description: "A comparative study of accuracy and learning behavior under varying sample budgets and runtime constraints."
+category: academic
 status: completed
 tags: ["Gaussian Processes", "SVM", "Ridge Regression", "Sample Efficiency", "Compute"]
 highlights:

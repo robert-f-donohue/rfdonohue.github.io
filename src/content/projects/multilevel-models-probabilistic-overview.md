@@ -1,6 +1,7 @@
 ---
 title: "Multi-Level Models — A Probabilistic Overview"
 description: "An intuitive, probabilistic framing of hierarchical models, partial pooling, and uncertainty decomposition."
+category: academic
 status: completed
 tags: ["Bayesian Statistics", "Hierarchical Models", "Partial Pooling", "Probabilistic Modeling"]
 highlights:

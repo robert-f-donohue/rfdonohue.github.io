@@ -1,6 +1,7 @@
 ---
 title: "Enverdex — Praevion Optimization Engine"
 description: "Simulation-driven retrofit optimization for building decarbonization, returning tradeoff-ready recommendations."
+category: startup
 status: active
 tags: ["Bayesian Optimization", "OpenStudio", "EnergyPlus", "Decarbonization", "Optimization"]
 website: "https://enverdex.com"  # change if needed

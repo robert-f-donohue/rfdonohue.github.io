@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).filter(
+  (p) => p.data.category === "academic"
+);
 
 // Sort: dated projects first; otherwise by title
 const sorted = projects.sort((a, b) => {
@@ -12,6 +14,10 @@ const sorted = projects.sort((a, b) => {
   return a.data.title.localeCompare(b.data.title);
 });
 ---
+
+<p class="mt-2 text-base opacity-80">
+  Academic + research work. For what I’m building right now, see <a href="/now/" class="underline">Now</a>.
+</p>
 
 <SiteLayout title="Projects" description="Selected projects and research case studies.">
   <h1 class="text-3xl font-bold">Projects</h1>
