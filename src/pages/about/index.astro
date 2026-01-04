@@ -1,0 +1,41 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+---
+
+<SiteLayout title="About" description="Background, interests, and what I'm building.">
+  <header class="space-y-3">
+    <h1 class="text-4xl font-bold tracking-tight">About</h1>
+    <p class="text-muted max-w-2xl">
+      I build decision tools with probabilistic modeling + optimization, focused on climate-tech and applied research.
+    </p>
+
+    <div class="flex flex-wrap gap-3 pt-2">
+      <ButtonLink href="/projects/" variant="secondary">Projects</ButtonLink>
+      <ButtonLink href="/blog/" variant="secondary">Writing</ButtonLink>
+      <ButtonLink href="/now/" variant="secondary">Now</ButtonLink>
+    </div>
+  </header>
+
+  <section class="mt-10 grid gap-4 md:grid-cols-2">
+    <div class="rounded-2xl border border-border bg-panel/40 p-6">
+      <h2 class="text-lg font-semibold text-fg">Focus</h2>
+      <ul class="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
+        <li>Bayesian modeling and uncertainty-aware decision making</li>
+        <li>Optimization (especially multi-objective + simulation-driven)</li>
+        <li>Building decarbonization + carbon compliance tooling</li>
+      </ul>
+    </div>
+
+    <div class="rounded-2xl border border-border bg-panel/40 p-6">
+      <h2 class="text-lg font-semibold text-fg">Now</h2>
+      <p class="mt-2 text-sm text-muted">
+        The most current updates live on the <a class="underline" href="/now/">Now</a> page.
+      </p>
+      <p class="mt-3 text-sm text-muted">
+        If you’re an investor or collaborator, the fastest overview is: <a class="underline" href="/projects/enverdex-praevion/">Praevion</a>.
+      </p>
+    </div>
+  </section>
+</SiteLayout>
+

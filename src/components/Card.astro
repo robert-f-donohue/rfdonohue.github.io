@@ -1,0 +1,23 @@
+---
+const { href, ariaLabel } = Astro.props as { href?: string; ariaLabel?: string };
+
+const base =
+  "relative rounded-2xl border border-border bg-bg p-5 shadow-soft/20 transition hover:shadow-soft";
+const linked = Boolean(href);
+---
+
+<div class={base}>
+  {href ? (
+    <a
+      href={href}
+      aria-label={ariaLabel ?? "Open"}
+      class="absolute inset-0 z-10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-accent/60"
+    />
+  ) : null}
+
+  <!-- If linked, let clicks pass through to the overlay link -->
+  <div class={`relative z-20 ${linked ? "pointer-events-none" : ""}`}>
+    <slot />
+  </div>
+</div>
+

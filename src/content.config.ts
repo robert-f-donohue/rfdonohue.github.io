@@ -9,7 +9,12 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      // ✅ Key fix: allow local image filepaths in frontmatter via image()
+
+      // NEW: allow tags + optional linking to a project page
+      tags: z.array(z.string()).default([]),
+      projectSlug: z.string().optional(),
+
+      // allow local images via image()
       heroImage: image().optional(),
     }),
 });

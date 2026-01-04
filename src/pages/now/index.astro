@@ -1,0 +1,115 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Card from "../../components/Card.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+
+const updates = [
+  {
+    date: "Jan 2026",
+    title: "Enverdex: Praevion MVP polish + demo readiness",
+    body:
+      "Tightening the optimization → KPI → UI loop so results feel decision-grade: clearer tradeoffs, better project surfacing, and an investor-friendly narrative.",
+    links: [
+      { href: "/projects/enverdex-praevion", label: "Project page" },
+      { href: "/projects", label: "All projects" },
+    ],
+  },
+  {
+    date: "Jan 2026",
+    title: "Writing: converting papers into blog posts",
+    body:
+      "Turning dense research into clear write-ups with figures, experiments, and takeaways — optimized for readers who want signal fast.",
+    links: [{ href: "/blog", label: "Writing" }],
+  },
+];
+---
+
+<SiteLayout title="Now" description="What I'm focused on right now.">
+  <header class="space-y-3">
+    <div class="inline-flex items-center gap-2 text-xs text-muted">
+      <span class="h-2 w-2 rounded-full bg-accent/80"></span>
+      Updated regularly · short status notes
+    </div>
+
+    <h1 class="text-4xl font-bold tracking-tight">Now</h1>
+    <p class="text-muted max-w-2xl">
+      A lightweight snapshot of what I’m building, learning, and shipping — separate from evergreen posts.
+    </p>
+  </header>
+
+  <!-- Top focus -->
+  <section class="mt-10 grid gap-4 md:grid-cols-3">
+    <Card>
+      <div class="text-xs text-muted">Primary</div>
+      <div class="mt-1 text-base font-semibold text-fg">Enverdex</div>
+      <p class="mt-2 text-sm text-muted">
+        Building a decarbonization optimization engine (Praevion) for retrofit recommendations and carbon compliance.
+      </p>
+      <div class="mt-4">
+        <ButtonLink href="/projects/enverdex-praevion" variant="secondary">View project →</ButtonLink>
+      </div>
+    </Card>
+
+    <Card>
+      <div class="text-xs text-muted">Methods</div>
+      <div class="mt-1 text-base font-semibold text-fg">Bayesian optimization</div>
+      <p class="mt-2 text-sm text-muted">
+        Batch search, mixed-variable spaces, multi-objective tradeoffs, and practical constraint handling.
+      </p>
+    </Card>
+
+    <Card>
+      <div class="text-xs text-muted">Communication</div>
+      <div class="mt-1 text-base font-semibold text-fg">Writing + demos</div>
+      <p class="mt-2 text-sm text-muted">
+        Converting research into investor-readable posts with figures and crisp takeaways.
+      </p>
+      <div class="mt-4">
+        <ButtonLink href="/blog" variant="ghost">Read writing →</ButtonLink>
+      </div>
+    </Card>
+  </section>
+
+  <!-- Updates feed -->
+  <section class="mt-12">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-xl font-semibold">Updates</h2>
+      <div class="text-sm text-muted">Most recent first</div>
+    </div>
+
+    <div class="mt-4 space-y-4">
+      {updates.map((u) => (
+        <Card>
+          <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+            <div class="min-w-0">
+              <div class="text-xs text-muted">{u.date}</div>
+              <h3 class="mt-1 text-lg font-semibold text-fg">{u.title}</h3>
+              <p class="mt-2 text-sm text-muted">{u.body}</p>
+
+              {u.links?.length ? (
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {u.links.map((l) => (
+                    <a
+                      class="rounded-xl border border-border bg-panel/60 px-3 py-1.5 text-sm text-fg hover:bg-panel"
+                      href={l.href}
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-12 rounded-3xl border border-border bg-panel/60 p-6">
+    <h2 class="text-lg font-semibold text-fg">Want the longer version?</h2>
+    <p class="mt-2 text-sm text-muted">
+      The <a class="underline" href="/blog">Writing</a> section contains evergreen posts with details, figures, and results.
+    </p>
+  </section>
+</SiteLayout>
+

@@ -1,86 +1,81 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import SiteLayout from "./SiteLayout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Tag from "../components/Tag.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Data = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+type Props = Data & {
+  readingTime?: string;
+};
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags = [],
+  projectSlug,
+  readingTime,
+} = Astro.props as Props;
+
+const projectHref = projectSlug ? `/projects/${projectSlug}/` : null;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<SiteLayout title={title} description={description}>
+  <article class="space-y-8">
+    <header class="space-y-4">
+      <a class="text-sm text-muted hover:underline" href="/blog">← Back to Writing</a>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+      <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted">
+        <span><FormattedDate date={pubDate} /></span>
+        {readingTime ? <span aria-hidden="true">·</span> : null}
+        {readingTime ? <span>{readingTime}</span> : null}
+        {updatedDate ? (
+          <>
+            <span aria-hidden="true">·</span>
+            <span class="italic">(Updated <FormattedDate date={updatedDate} />)</span>
+          </>
+        ) : null}
+      </div>
+
+      <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+      {description ? <p class="text-muted max-w-3xl">{description}</p> : null}
+
+      {(tags?.length || projectHref) ? (
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          {projectHref ? (
+            <a
+              href={projectHref}
+              class="rounded-full border border-border bg-panel/60 px-3 py-1 text-xs text-fg hover:bg-panel"
+            >
+              Related project →
+            </a>
+          ) : null}
+          {tags?.length ? tags.map((t: string) => <Tag label={t} />) : null}
+        </div>
+      ) : null}
+    </header>
+
+    {heroImage ? (
+      <div class="overflow-hidden rounded-3xl border border-border bg-panel/40">
+        <Image src={heroImage} alt="" width={1200} height={630} class="w-full object-cover" />
+      </div>
+    ) : null}
+
+    <div class="prose prose-slate dark:prose-invert max-w-none">
+      <slot />
+    </div>
+
+    <hr />
+
+    <div class="flex flex-wrap items-center justify-between gap-3 text-sm">
+      <a class="text-muted hover:underline" href="/blog">← More writing</a>
+      {projectHref ? <a class="text-muted hover:underline" href={projectHref}>View related project →</a> : null}
+    </div>
+  </article>
+</SiteLayout>
+

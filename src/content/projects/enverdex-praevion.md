@@ -24,3 +24,7 @@ Building owners and cities need decision-grade retrofit guidance without buildin
 
 ## Current status
 Active development; building an investor-ready product layer and polished UX.
+
+## Where it’s going
+Near-term: a smooth UX that makes tradeoffs obvious and action-oriented (shortlists, comparisons, and export-ready outputs).
+Long-term: expand across cities/typologies with robust priors, improved surrogate modeling, and decision support layers.

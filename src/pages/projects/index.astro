@@ -1,43 +1,49 @@
 ---
-import { getCollection } from "astro:content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects")).filter(
-  (p) => p.data.category === "academic"
-);
+const all = await getCollection("projects");
 
-// Sort: dated projects first; otherwise by title
-const sorted = projects.sort((a, b) => {
-  const ad = a.data.pubDate ? a.data.pubDate.getTime() : -Infinity;
-  const bd = b.data.pubDate ? b.data.pubDate.getTime() : -Infinity;
+const startup = all.filter((p) => p.data.category === "startup");
+const academic = all.filter((p) => p.data.category === "academic");
+
+const sortKey = (a: any, b: any) => {
+  const ad = a.data.pubDate?.valueOf?.() ?? 0;
+  const bd = b.data.pubDate?.valueOf?.() ?? 0;
   if (ad !== bd) return bd - ad;
   return a.data.title.localeCompare(b.data.title);
-});
+};
+
+startup.sort(sortKey);
+academic.sort(sortKey);
 ---
 
-<p class="mt-2 text-base opacity-80">
-  Academic + research work. For what I’m building right now, see <a href="/now/" class="underline">Now</a>.
-</p>
+<SiteLayout title="Projects" description="Academic + startup work, with writeups and results.">
+  <header class="space-y-2">
+    <h1 class="text-3xl font-bold tracking-tight">Projects</h1>
+    <p class="text-muted">Startup work and research notes with clear outcomes and write-ups.</p>
+  </header>
 
-<SiteLayout title="Projects" description="Selected projects and research case studies.">
-  <h1 class="text-3xl font-bold">Projects</h1>
-  <p class="mt-2 text-base opacity-80">Selected work: product, research, and modeling case studies.</p>
+  <section class="mt-10">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-xl font-semibold">Startup</h2>
+      <span class="text-sm text-muted">{startup.length} items</span>
+    </div>
+    <div class="mt-4 grid gap-4 md:grid-cols-2">
+      {startup.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
 
-  <ul class="mt-8 space-y-6">
-    {sorted.map((p) => (
-      <li class="rounded-xl border border-black/10 p-5 shadow-sm">
-        <a class="text-xl font-semibold" href={`/projects/${p.slug}/`}>{p.data.title}</a>
-        <p class="mt-2">{p.data.description}</p>
-
-        <div class="mt-3 text-sm opacity-80">
-          <strong>Status:</strong> {p.data.status}
-          {p.data.website ? <>{" · "}<a href={p.data.website} target="_blank">Website</a></> : null}
-          {p.data.writeup ? <>{" · "}<a href={p.data.writeup} target="_blank">Write-up</a></> : null}
-          {p.data.demo ? <>{" · "}<a href={p.data.demo} target="_blank">Demo</a></> : null}
-          {p.data.paper ? <>{" · "}<a href={p.data.paper} target="_blank">Paper</a></> : null}
-          {p.data.slides ? <>{" · "}<a href={p.data.slides} target="_blank">Slides</a></> : null}
-        </div>
-      </li>
-    ))}
-  </ul>
+  <section class="mt-12">
+    <div class="flex items-baseline justify-between">
+      <h2 class="text-xl font-semibold">Academic</h2>
+      <span class="text-sm text-muted">{academic.length} items</span>
+    </div>
+    <div class="mt-4 grid gap-4 md:grid-cols-2">
+      {academic.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
 </SiteLayout>
+
+

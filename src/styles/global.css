@@ -1,157 +1,203 @@
 @import "tailwindcss";
 
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+/* Fonts */
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* ---------------------------------------------------------
+   Tokens
+--------------------------------------------------------- */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
+  /* Core palette */
+  --bg: 255 255 255;
+  --fg: 15 23 42;         /* slate-900 */
+  --muted: 71 85 105;     /* slate-600 */
+  --border: 226 232 240;  /* slate-200 */
+  --panel: 248 250 252;   /* slate-50 */
+  --accent: 37 99 235;    /* blue-600 */
+
+  /* Extra tokens */
+  --ring: 37 99 235;      /* match accent */
+  --shadow: 0 10px 30px -12px rgb(0 0 0 / 0.18);
+
+  /* Code */
+  --code-bg: 248 250 252;
+  --code-fg: 15 23 42;
+
+  --radius: 18px;
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 2 6 23;         /* slate-950 */
+    --fg: 226 232 240;    /* slate-200 */
+    --muted: 148 163 184; /* slate-400 */
+    --border: 30 41 59;   /* slate-800 */
+    --panel: 15 23 42;    /* slate-900 */
+    --accent: 96 165 250; /* blue-400 */
+    --ring: 96 165 250;
+    --shadow: 0 10px 30px -12px rgb(0 0 0 / 0.45);
+
+    --code-bg: 15 23 42;
+    --code-fg: 226 232 240;
+  }
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
+
+/* ---------------------------------------------------------
+   Base
+--------------------------------------------------------- */
+html,
 body {
-	font-family: "Atkinson", sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+  height: 100%;
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+
+html {
+  color-scheme: light dark;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
+
+body {
+  margin: 0;
+  font-family: "Atkinson", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  color: rgb(var(--fg));
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Subtle premium background */
+  background-image:
+    radial-gradient(1200px circle at 15% -10%, rgb(var(--accent) / 0.12), transparent 60%),
+    radial-gradient(900px circle at 90% 10%, rgb(var(--border) / 0.35), transparent 55%);
+  background-attachment: fixed;
 }
-h1 {
-	font-size: 3.052em;
+
+/* Default focus behavior (helps accessibility everywhere) */
+:focus-visible {
+  outline: 2px solid rgb(var(--ring) / 0.65);
+  outline-offset: 2px;
+  border-radius: 10px;
 }
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
+
+/* Links */
 a {
-	color: var(--accent);
+  color: rgb(var(--accent));
+  text-decoration: none;
 }
 a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, rgb(var(--accent)) 45%, transparent);
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+::selection {
+  background: color-mix(in srgb, rgb(var(--accent)) 25%, transparent);
 }
+
+/* Media */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+img {
+  border-radius: calc(var(--radius) - 6px);
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  border-top: 1px solid rgb(var(--border));
+}
+
+/* Code */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  font-size: 0.95em;
+  background: rgb(var(--code-bg));
+  color: rgb(var(--code-fg));
+  padding: 0.15rem 0.35rem;
+  border: 1px solid rgb(var(--border));
+  border-radius: 10px;
+}
+
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  background: rgb(var(--code-bg));
+  color: rgb(var(--code-fg));
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+
+pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid rgb(var(--border));
+  color: rgb(var(--muted));
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table th,
+table td {
+  border-bottom: 1px solid rgb(var(--border));
+  padding: 0.6rem 0.5rem;
+  text-align: left;
+}
+
+/* Prose tweaks (typography plugin output) */
+.prose a {
+  color: rgb(var(--accent));
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, rgb(var(--accent)) 35%, transparent);
+  text-underline-offset: 3px;
+}
+.prose a:hover {
+  text-decoration-color: color-mix(in srgb, rgb(var(--accent)) 70%, transparent);
+}
+.prose :where(code):not(:where(pre code)) {
+  font-weight: 500;
+}
+
+/* Accessibility */
+.sr-only {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
