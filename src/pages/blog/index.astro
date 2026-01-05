@@ -1,37 +1,22 @@
 ---
-import SiteLayout from "../../layouts/SiteLayout.astro";
-import PostCard from "../../components/PostCard.astro";
-import { getCollection } from "astro:content";
-
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-const featured = posts[0];
-const rest = posts.slice(1);
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/blog/Hero.astro";
+import Tags from "../../components/blog/Tags.astro";
+import ListPosts from "../../components/blog/ListPosts.astro";
+const pageTitle = "Data Science & Optimization Blog | Robert Donohue | Enverdex";
+const description = "Welcome to my blog, where I share my passion for data science, Bayesian learning, and sustainability.";
+const ogimage ={
+    url: "/images/blogimage.webp",
+    alt: "EFEELE.dev logo with green background and light effect. Text: 'Web Development and Technology Blog' and URL 'www.efeele.dev'."
+};
 ---
 
-<SiteLayout title="Writing" description="Notes on Bayesian modeling, optimization, and applied research.">
-  <header class="space-y-3">
-    <div class="flex flex-wrap items-baseline justify-between gap-2">
-      <h1 class="text-4xl font-bold tracking-tight">Writing</h1>
+<Layout  pageTitle={pageTitle} description={description} ogimage={ogimage}>
+
+    <Hero />
+    <Tags />
+    <div class="px-8 max-sm:px-4">
+        <ListPosts />
     </div>
 
-    <p class="text-muted max-w-2xl">
-      Methods, experiments, and project writeups — optimized for clarity and takeaways.
-    </p>
-  </header>
-
-  {featured ? (
-    <section class="mt-8">
-      <PostCard post={featured} featured />
-    </section>
-  ) : null}
-
-  <section class="mt-8">
-    <div class="grid gap-4 md:grid-cols-2">
-      {rest.map((post) => <PostCard post={post} />)}
-    </div>
-  </section>
-</SiteLayout>
-
+</Layout>
