@@ -5,7 +5,7 @@ pubDate: 2026-01-04
 description: 'A toy example showing discrete-time hazard modeling concepts for incumbent defeat risk over an election cycle.'
 languages: ["python"]
 image:
-  url: "/images/projects/neonmint.webp"
+  url: "/images/projects/senate-risk-trajectories.webp"
   alt: "Thumbnail of Astro arches."
 ---
 

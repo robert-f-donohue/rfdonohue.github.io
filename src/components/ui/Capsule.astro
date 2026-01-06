@@ -33,6 +33,14 @@ const sizeClasses = {
 
 const selectedLanguage = getLanguage(lang);
 
+if (!selectedLanguage) {
+    throw new Error(
+        `[Capsule] Unknown technology tag "${lang}". ` +
+        `This tag is not in your tech stack registry. ` +
+        `Fix the blog post tags (or add it back to utils/languages).`
+    );
+}
+
 const getContainerClasses = () => {
     const textSize = selectedLanguage.name.length > 10 ? "text-sm" : "text-base";
     return `${baseClasses.container} ${textSize}`;

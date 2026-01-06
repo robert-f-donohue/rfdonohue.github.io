@@ -5,7 +5,7 @@ pubDate: 2026-01-04
 description: 'Simulation-driven retrofit optimization for building decarbonization, returning tradeoff-ready recommendations.'
 languages: ["python"]
 image:
-  url: "/images/projects/neonmint.webp"
+  url: "/images/projects/enverdex_sandbox.webp"
   alt: "Thumbnail of Astro arches."
 ---
 

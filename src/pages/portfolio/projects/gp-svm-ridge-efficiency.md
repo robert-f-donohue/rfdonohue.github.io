@@ -5,7 +5,7 @@ pubDate: 2026-01-04
 description: 'A comparative study of accuracy and learning behavior under varying sample budgets and runtime constraints.'
 languages: ["python"]
 image:
-  url: "/images/projects/neonmint.webp"
+  url: "/images/projects/gp-regression.webp"
   alt: "Thumbnail of Astro arches."
 ---
 

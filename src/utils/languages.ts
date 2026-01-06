@@ -69,7 +69,7 @@ export const languages: Record<string, Language> = {
         iconName: "aws",
     },
     gcp: {
-        name: "gcp",
+        name: "GCP",
         iconName: "gcp",
     },
 

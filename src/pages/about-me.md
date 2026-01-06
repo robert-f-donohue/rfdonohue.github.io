@@ -4,7 +4,7 @@ title: "Robert Donohue | Data Science & Building Decarbonization 🚀"
 description: "Data scientist and sustainability professional building Enverdex (Praevion), an optimization engine for cost-effective building decarbonization and compliance. I share practical notes on Bayesian methods, optimization, and energy modeling."
 author: "Robert Donohue"
 image:
-  url: "/images/efeeleprofile.webp"
+  url: "/images/rfd-web-headshot.webp"
   alt: "Photo of Robert Donohue"
 ---
 
@@ -39,7 +39,7 @@ I write for technical readers (founders, engineers, researchers, and climate-tec
 - Multi-objective optimization for real-world design decisions
 - Decision-making under uncertainty (Bayesian thinking in production)
 - Scaling simulation-driven workflows with practical software engineering
-- Building decarbonization: cost, carbon, and feasibility—together
+- Building decarbonization: cost, carbon, and feasibility
 
 ## Let’s connect
 

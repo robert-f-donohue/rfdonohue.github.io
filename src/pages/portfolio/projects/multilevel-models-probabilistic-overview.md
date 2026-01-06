@@ -5,7 +5,7 @@ pubDate: 2026-01-04
 description: 'An intuitive, probabilistic framing of hierarchical models, partial pooling, and uncertainty decomposition.'
 languages: ["python"]
 image:
-  url: "/images/projects/neonmint.webp"
+  url: "/images/projects/prob_partial_pooling.webp"
   alt: "Thumbnail of Astro arches."
 ---
 

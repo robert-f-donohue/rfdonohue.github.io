@@ -129,8 +129,18 @@ a.inline-block.leading-5.pl-12{
 
 .markdown hr {
   @apply dark:text-mint-300/50 text-blacktext/30;
-
 }
+
+.markdown figure img {
+  border-radius: 0.75rem;
+  border: 1px solid rgb(39 39 42); /* zinc-800-ish */
+}
+
+.markdown figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  }
 
 .markdown blockquote {
   @apply py-4 border-l-4 border-mint-500 pl-4 italic text-blacktext dark:text-mint-200 bg-mint-50 dark:bg-mint-900/20 backdrop-blur-lg mb-8;

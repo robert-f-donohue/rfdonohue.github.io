@@ -26,6 +26,11 @@ import Capsule from "../ui/Capsule.astro";
         </div>
     </div>
     {image?.url && (
-            <a href={url} style={{ backgroundImage: `url(${image.url})` }} class="shrink-0 rounded-2xl bg-center bg-cover aspect-video max-md:aspect-video w-2/6 max-md:w-full" />
+            <a
+                    href={url}
+                    style={{ backgroundImage: `url(${image.url})` }}
+                    class="shrink-0 rounded-2xl bg-center bg-cover aspect-video w-2/6 max-md:w-full"
+                    aria-label={`Read post: ${title}`}
+            />
     )}
 </article>

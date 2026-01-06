@@ -17,8 +17,11 @@
     "alpinejs": "^3.14.9",
     "astro": "^5.15.6",
     "astro-icon": "^1.1.5",
+    "katex": "^0.16.27",
     "preact": "^10.26.2",
     "prismjs": "^1.30.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {

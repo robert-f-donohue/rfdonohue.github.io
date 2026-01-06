@@ -5,21 +5,31 @@ import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap"
 import icon from "astro-icon";
 
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://rfdonohue.io",
-  integrations: [preact(), icon(), sitemap({
-    filter: (page) =>
-        !page.includes("/blog/tags") &&
-        !page.includes("/blog/techs"),
-  }),],
+  integrations: [
+    preact(),
+    icon(),
+    sitemap({
+      filter: (page) =>
+          !page.includes("/blog/tags") &&
+          !page.includes("/blog/techs"),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
   },
+
   markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
-      theme: 'github-dark'
+      theme: 'github-dark',
     },
   },
 });
