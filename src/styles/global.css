@@ -131,6 +131,10 @@ a.inline-block.leading-5.pl-12{
   @apply dark:text-mint-300/50 text-blacktext/30;
 }
 
+.markdown figure {
+  margin: 1.50rem 0;
+}
+
 .markdown figure img {
   border-radius: 0.75rem;
   border: 1px solid rgb(39 39 42); /* zinc-800-ish */
