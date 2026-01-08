@@ -164,7 +164,6 @@ support vectors to make predictions rather than the entirety of the training set
 
 SVMs create convex optimization problems, even on nonlinear data, by using what is commonly known as the *“kernel trick”*.
 
-
 Common kernels include linear, polynomial, sigmoid, and Gaussian radial basis functions (RBF).
 
 ```python
@@ -175,24 +174,27 @@ svr_model = SVR(kernel="rbf", C=20, epsilon=0.005, gamma=1.0)
 
 ### GPs: uncertainty + active sampling
 
-Bayesian optimization techniques are extremely sample-efficient due to their incorporation of prior beliefs, $p(w)$,
-about the problem that directs sampling in an active setting rather than randomly or sequentially.
+Bayesian optimization techniques are **often extremely sample-efficient due to their incorporation of prior beliefs**, 
+$p(w)$, about the problem that directs sampling in an active setting rather than randomly or sequentially.
 
 Bayesian linear regression is grounded in the theoretical concepts of Bayes’ rule. It relies on the *posterior
 distribution*, $p(w \mid y,X)$.
 
-This distribution is defined as the product of the prior beliefs and likelihood, $p(y \mid X,w)$,
-which is the probability density of the observed points.
+This distribution is defined as the product of the prior beliefs and likelihood, $p(y \mid X,w)$, which is the 
+probability density of the observed points.
 
-The two main components of a Bayesian optimization (BO) algorithm are the surrogate model and acquisition function. 
+The two main components of a Bayesian optimization (BO) algorithm are the **surrogate model** and **acquisition
+function**. 
 
-The former is the model’s current “best guess” at estimating the objective function, and the latter is the method by 
+The former is the model’s current *“best guess”* at estimating the objective function, and the latter is the method by 
 which we choose new locations to sample. 
 
-The most common surrogate model for continuous feature spaces is the Gaussian process (GP). Similar to how a Gaussian 
-distribution is a distribution over a random variable, the GP is a distribution over a function. 
+The most common surrogate model for continuous feature spaces is the **Gaussian process (GP)**. 
 
-Instead of returning a scalar at some point $x$, the GP returns the mean and variance of a normal distribution 
+Similar to how a Gaussian distribution is a distribution over a random variable, **the GP is a distribution over a 
+function.** 
+
+Instead of returning a scalar at some point $x$, the GP returns the **mean** and **variance** of a normal distribution 
 over all possible values of $f(x)$ at $x$.
 
 
@@ -218,7 +220,7 @@ gp_model = GaussianProcessRegressor(
 
 The compute story is blunt and unsurprising: 
 
-Ridge and SVR remain extremely fast, while GP fit time grows dramatically 
+**Ridge and SVR remain extremely fast**, while GP fit time grows dramatically 
 as the kernel matrix scales.
 
 <figure>
@@ -232,11 +234,11 @@ as the kernel matrix scales.
 
 The accuracy story is the opposite:
 
-The GP (especially with active sampling) reaches strong performance with far fewer 
-samples.
+The **GP reaches strong performance with far fewer 
+samples**, especially with active sampling.
 
-Although the Ridge regression is able to ultimately outperform both the SVR and GP, it takes far more samples to
-stabilize, as shown below:
+Although the Ridge regression is able to ultimately outperform both the SVR and GP, *it takes far more samples to
+stabilize*.
 
 <figure>
   <img
@@ -247,13 +249,7 @@ stabilize, as shown below:
 </figure>
 
 The final figure aims to show how the acquisition-based sampling of the GP can reach high levels of performance with 
-significantly fewer samples. 
-
-The red points on the scatter plot show the points that were sampled until the GP reached within 5% of the lowest RMSE 
-of the SVM model after 100 samples. 
-
-This threshold was hit after just **16 samples**, *84% higher sample efficiency*, emphasizing the powerful aspects of 
-GPs in “expensive-to-evaluate” settings.
+significantly fewer samples.
 
 <figure>
   <img
@@ -263,11 +259,17 @@ GPs in “expensive-to-evaluate” settings.
   />
 </figure>
 
+The red points on the scatter plot show the points that were sampled until the GP reached within 5% of the lowest RMSE
+of the SVM model after 100 samples.
+
+This threshold was hit after just **16 samples**, *84% higher sample efficiency*, emphasizing the powerful aspects of
+GPs in “expensive-to-evaluate” settings.
+
 ### What this means in practice
 
 - If your data is expensive, the GP can be worth it even if training is slower.
 - If your data is cheap (or you already have a lot), Ridge/SVR often win on total cost.
-- Active sampling is where the GP becomes a different kind of tool: not just a regressor, but a data-collection strategy.
+- Active sampling is where the GP becomes a different kind of tool: ***not just a regressor, but a data-collection strategy.***
 
 
 ### So... when is a GP worth it
@@ -280,18 +282,20 @@ A simple decision rubric:
   - you can **afford more samples**
 
 - Choose SVR if:
-  - you want nonlinear fit without GP-level compute
+  - you want **nonlinear fit without GP-level compute**
   - you expect sparse support vectors to work well
   - you can tune hyperparameters reasonably
 
 - Choose GP (+ active sampling) if:
-  - each sample is expensive (simulation, lab trials, robotics, etc.)
+  - **each sample is expensive** (simulation, lab trials, robotics, etc.)
   - uncertainty estimates will drive decisions
   - you benefit from choosing where to sample next
 
 ---
 
 ## Appendix: Regression Crash Course
+
+### Linear (Ridge) Regression
 
 In its simplest form, linear regression assumes a linear relationship between an input $x$ and a response, $y$.
 
@@ -302,21 +306,19 @@ $$y = \beta{0} + \beta{1}X_1 + \cdots + \beta_pX_p + \epsilon,$$
 one can employ a *polynomial regression* technique that effectively transforms the input features into a polynomial
 equation that best fits the function.
 
-Despite the target function being nonlinear, the solution is still classified as a linear model, as it has a closed-form
-solution that remains a linear combination of the features.
+> Despite the target function being nonlinear, the solution is still classified as a linear model, as it has a
+> **closed-form solution that remains a linear combination of the features**.
 
-In a traditional setting, linear models are optimized to reduce the residual sum of squares (RSS) across the dataset.
+In a traditional setting, linear models are **optimized to reduce the residual sum of squares (RSS) across the
+dataset**.
 
+In theory, one could fit any nonlinear function using a flexible polynomial regressor, *but this can negatively affect
+the model’s ability to generalize to unseen data* by overfitting to the training set.
 
-In theory, one could fit any nonlinear function using a flexible polynomial regressor, but this can negatively affect
-the model’s ability to generalize to unseen data by overfitting to the training set.
-
-To reduce model complexity when fitting complex linear models, regularization methods, such as lasso (L1) and lasso (L2)
+To reduce model complexity when fitting complex linear models, regularization methods, such as Lasso (L1) and Ridge (L2)
 regression, are used.
 
-### Linear (Ridge) Regression
-
-In this case, we will focus on ridge regression.
+In this case, we will focus on Ridge regression.
 
 Ridge regression works very similarly to the least squares regression, but a regularization penalty term is introduced
 as follows:
@@ -330,44 +332,46 @@ of model predictions.
 
 ### Support Vector Machines (SVMs)
 
-classification tasks. The SVM is traditionally used to solve binary classification problems by finding the maximum
-margin separating the hyperplane dividing up the feature space.
+The SVM is traditionally used to solve binary classification problems by finding the **maximum margin** separating the 
+hyperplane dividing up the feature space.
 
-The attractiveness of SVMs comes from the fact that they are a sparse technique, meaning that instead of relying on the
-entirety of the training set, they rely solely on support vectors to make predictions.
+**Support vector regression (SVR) is a generalization of the SVM**, where an $\epsilon$-insensitive region is 
+established around the function in an $\epsilon$-tube.
+
+The optimization problem then becomes *finding the flattest tube that results in the lowest $\epsilon$-insensitive loss
+using support vectors that influence the tube's shape*.
+
+The attractiveness of SVMs comes from the fact that they are a **sparse technique**, meaning that instead of relying on
+the entirety of the training set, **they rely solely on support vectors to make predictions**.
 
 SVMs create convex optimization problems, even on nonlinear data, by using what is commonly known as the “kernel trick.”
 
 This entails projecting the input space into a higher-dimensional feature space. This capability enables them to
-separate datasets that may nitially appear to be linearly inseparable, as is the case in many real-world datasets.
+separate datasets that may initially appear to be *linearly inseparable*, as is the case in many real-world datasets.
 
-Common kernels include linear, polynomial, sigmoid, and Gaussian radial basis functions (RBF). In this paper, any
-reference to kernels will specifically pertain to the Radial Basis Function (RBF) kernel.
+Common kernels include linear, polynomial, sigmoid, and Gaussian radial basis functions (RBF). 
 
-The choice is based on the RBF kernel being infinitely smooth, making it ideal for approximating complex unknown target
-functions.
+> In this paper, any reference to kernels will specifically pertain to the **Radial Basis Function (RBF) kernel**.
+
+The choice is based on the RBF kernel being *infinitely smooth*, making it ideal for approximating complex unknown 
+target functions.
 
 The RBF kernel, $k(x,x')$, is defined as
 
 $$k(x,x') = \text{exp} \left(\frac{-||x-x'||^2}{\sigma^2}\right)$$
 
-> Looks super fun and easy to visualize, right? ... Right?
-
-Support vector regression (SVR) is a generalization of the SVM, where an $\epsilon$-insensitive region is established
-around the function in an $\epsilon$-tube.
-
-The optimization problem then becomes finding the flattest tube that results in the lowest $\epsilon$-insensitive loss
-using support vectors that influence the tube's shape.
+Looks super fun and easy to visualize, right? ... Right?!
 
 ### Bayesian Optimization & Gaussian Processes
 
-In addition to traditional machine learning techniques, various Bayesian optimization (BO) techniques can be employed to
-deal with the “expensive to evaluate” black-box functions, where the need for sample-efficient techniques is essential.
+In addition to traditional machine learning methods, various Bayesian optimization (BO) techniques can be employed to
+deal with the **“expensive-to-evaluate” black-box functions**, where the need for sample-efficient techniques is 
+essential.
 
-These have become increasingly popular in settings like hyperparameter tuning of DNNs and laboratory experiments where
-generating new samples, or training points, is time-consuming or costly.
+> These have become increasingly popular in settings like hyperparameter tuning of DNNs and laboratory experiments where 
+> generating new samples is time-consuming or costly.
 
-Bayesian optimization techniques are extremely sample-efficient due to their incorporation of prior beliefs, $p(w)$,
+Bayesian optimization techniques are sample-efficient due to their incorporation of prior beliefs, $p(w)$,
 about the problem that directs sampling in an active setting rather than randomly or sequentially.
 
 Bayesian linear regression is grounded in the theoretical concepts of Bayes’ rule. It relies on the *posterior
@@ -376,16 +380,17 @@ distribution*, $p(w \mid y,X)$.
 This distribution is defined as the product of the prior beliefs and likelihood, $p(y \mid X,w)$,
 which is the probability density of the observed points.
 
-The two main components of a BO algorithm are the surrogate model and acquisition function. The former is the model’s
-current “best guess” at estimating the objective function, and the latter is the method by which we choose new locations\
-to sample.
+The two main components of a BO algorithm are the **surrogate model** and **acquisition function**. 
+
+The former is the model’s current “best guess” at estimating the objective function, and the latter is the method by 
+which we choose new locations to sample.
 
 The most common surrogate model for continuous feature spaces is the Gaussian process (GP).
 
-Similar to how a Gaussian distribution is a distribution over a random variable, the GP is a distribution over a
-function.
+Similar to how a Gaussian distribution is a distribution over a random variable, **the GP is a distribution over a
+function**.
 
-Instead of returning a scalar at some point $x$, the GP returns the mean and varaince of a normal distribution over all
+Instead of returning a scalar at some point $x$, the GP returns the mean and variance of a normal distribution over all
 possible values of $f(x)$.
 
 The GP is defined by its mean function, $\mu(x)$, and covariance function, $k$, such that
@@ -405,15 +410,16 @@ represents the 95% confidence interval, and red dots indicate the training obser
   />
 </figure>
 
-This representation of the GP posterior gives way to the second portion of the BO algorithm, acquisition functions.
+This representation of the GP posterior gives way to the second portion of the BO algorithm, **acquisition functions**.
 
 The role of the acquisition function is to determine the method by which new points are sampled. Various methods exist,
 such as Expected Improvement (EI), Probability of Improvement (PI), and Upper-Confidence Bound (UCB).
 
-Acquisition functions must balance the exploration-exploitation trade-off by the use of regularization hyperparameters.
+> Acquisition functions must balance the exploration-exploitation trade-off by the use of regularization 
+> hyperparameters.
 
 This is especially relevant in a regression scenario where global exploration of the target function is desired, as many
 acquisition functions are quite greedy if not adequately regularized.
 
-When implemented correctly, the use of GPs can significantly enhance sample efficiency and reduce error in continuous
-objective functions.
+**When implemented correctly, the use of GPs can significantly enhance sample efficiency and reduce error in continuous
+objective functions**.
