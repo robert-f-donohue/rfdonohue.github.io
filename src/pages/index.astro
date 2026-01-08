@@ -1,103 +1,22 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import ButtonLink from "../components/ButtonLink.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import PostCard from "../components/PostCard.astro";
+import Layout from "../layouts/Layout.astro";
+import Experience from "../components/portfolio/Experience.astro";
+import HeroIndex from "../components/portfolio/HeroIndex.astro";
+import Contact from "../components/portfolio/Contact.astro";
+import ListProjects from "../components/portfolio/ListProjects.astro";
 import { getCollection } from "astro:content";
 
-const projectsAll = await getCollection("projects");
-const postsAll = await getCollection("blog");
-
-const latestPosts = postsAll
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 3);
-
-const startup = projectsAll.filter((p) => p.data.category === "startup");
-const academic = projectsAll.filter((p) => p.data.category === "academic");
-
-const featuredStartup = startup.slice(0, 1);
-const featuredAcademic = academic.slice(0, 3);
+const [staticData] = await getCollection("staticData");
+const { pageTitle, pageDescription, OGImage } = staticData.data;
 ---
 
-<SiteLayout title="Robert Donohue" description="Applied Bayesian modeling, optimization, and product-minded research.">
-  <section class="relative overflow-hidden rounded-3xl border border-border bg-panel/60 p-8">
-    <div class="text-sm text-muted">rfdonohue.io</div>
-
-    <h1 class="mt-3 text-4xl font-bold tracking-tight leading-tight">
-      I build decision tools with probabilistic modeling + optimization.
-    </h1>
-
-    <p class="mt-3 text-lg text-muted max-w-2xl">
-      Climate-tech builder at Enverdex, and researcher focused on Bayesian methods,
-      efficiency tradeoffs, and interpretable models.
-    </p>
-
-    <div class="mt-6 flex flex-wrap gap-3">
-      <ButtonLink href="/now/" variant="primary">Now</ButtonLink>
-      <ButtonLink href="/projects/" variant="secondary">Projects</ButtonLink>
-      <ButtonLink href="/blog/" variant="secondary">Writing</ButtonLink>
-      <ButtonLink href="/about/" variant="secondary">About</ButtonLink>
-    </div>
-
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      <div class="rounded-2xl border border-border bg-bg/50 p-4">
-        <div class="text-xs text-muted">Focus</div>
-        <div class="mt-1 text-sm font-semibold text-fg">Optimization → product</div>
-        <div class="mt-1 text-sm text-muted">Turning research workflows into tools people can use.</div>
-      </div>
-      <div class="rounded-2xl border border-border bg-bg/50 p-4">
-        <div class="text-xs text-muted">Methods</div>
-        <div class="mt-1 text-sm font-semibold text-fg">Bayesian + MOO</div>
-        <div class="mt-1 text-sm text-muted">Uncertainty-aware decisions and tradeoffs.</div>
-      </div>
-      <div class="rounded-2xl border border-border bg-bg/50 p-4">
-        <div class="text-xs text-muted">Writing</div>
-        <div class="mt-1 text-sm font-semibold text-fg">Clear + investor-readable</div>
-        <div class="mt-1 text-sm text-muted">From papers → blog posts with figures and results.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="mt-14">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-xl font-semibold">Building now</h2>
-      <a class="text-sm text-muted hover:underline" href="/projects/">View all</a>
-    </div>
-
-    <div class="mt-4 grid gap-4 md:grid-cols-3">
-      {featuredStartup.map((p) => <ProjectCard project={p} />)}
-      <div class="md:col-span-2 rounded-2xl border border-border bg-panel/60 p-6">
-        <h3 class="text-lg font-semibold text-fg">Enverdex</h3>
-        <p class="mt-2 text-sm text-muted">
-          Building a decarbonization optimization engine (Praevion) that connects retrofit decisions
-          to cost + carbon outcomes with interpretable tradeoffs.
-        </p>
-        <div class="mt-4 flex gap-3">
-          <ButtonLink href="/now/" variant="secondary">Updates</ButtonLink>
-          <ButtonLink href="/projects/enverdex-praevion/" variant="ghost">Read the project →</ButtonLink>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="mt-14">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-xl font-semibold">Selected research</h2>
-      <a class="text-sm text-muted hover:underline" href="/projects/">View all</a>
-    </div>
-    <div class="mt-4 grid gap-4 md:grid-cols-3">
-      {featuredAcademic.map((p) => <ProjectCard project={p} />)}
-    </div>
-  </section>
-
-  <section class="mt-14">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-xl font-semibold">Latest writing</h2>
-      <a class="text-sm text-muted hover:underline" href="/blog/">View all</a>
-    </div>
-    <div class="mt-4 grid gap-4 md:grid-cols-3">
-      {latestPosts.map((p) => <PostCard post={p} />)}
-    </div>
-  </section>
-</SiteLayout>
-
+<Layout
+        pageTitle={pageTitle}
+        description={pageDescription}
+        ogimage={{ alt: OGImage.alt, url: OGImage.url }}
+>
+    <HeroIndex />
+    <Experience />
+    <ListProjects />
+    <Contact />
+</Layout>

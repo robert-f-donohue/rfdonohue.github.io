@@ -1,0 +1,34 @@
+{
+  "profileImage": "/images/rfd-web-headshot.webp",
+  "profileAlt": "Photo of Robert Donohue for the blog",
+  "profileLink": "/about-me",
+  "profileTitle": "Data Scientist & Optimization Engineer",
+  "profileName": "Bob Donohue",
+  "github": "https://github.com/robert-f-donohue/rfdonohue.github.io",
+  "githubText": "Do you like this blog's design?",
+  "portfolioImage": "/images/enverdex_project_img.webp",
+  "email": "robert.donohue@enverdex.com",
+  "linkedin": "https://www.linkedin.com/in/robert-f-donohue/",
+  "alias": "RFD",
+  "contactSectionTitle": "Want to talk climate + optimization?",
+  "contactSectionSubtitle": "Ask me about Enverdex!",
+  "contactSectionButtonText": "Email Me",
+  "contactSectionButtonIcon": "paperplane",
+  "techsTitle": "TECH",
+  "githubIconName": "github",
+  "linkedinIconName": "linkedin",
+  "emailIconName": "envelope",
+  "hobbies": [
+    "PC building",
+    "Mensware",
+    "Reading Philosophy",
+    "Hiking",
+    "Fantasy Football"
+  ],
+  "pageTitle": "Portfolio | Robert Donohue",
+  "pageDescription": "",
+  "OGImage": {
+    "url": "/images/imagedefault.webp",
+    "alt": "Screenshot of a web portfolio with a modern and dark design. Featuring Robert Donohue, a Frontend Developer with 8 years of experience, highlighting his passion for development and technology. Includes contact sections, projects, and a technology stack with technologies like HTML5, JavaScript, TypeScript, Angular, Node.js, CSS, Tailwind, and more."
+  }
+}

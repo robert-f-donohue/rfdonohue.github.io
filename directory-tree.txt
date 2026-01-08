@@ -1,0 +1,165 @@
+rfdonohue.github.io/
+├── public/
+│   ├── fonts/
+│   │   ├── atkinson-bold.woff
+│   │   └── atkinson-regular.woff
+│   ├── images/
+│   │   ├── posts/
+│   │   │   ├── animated-borders-tailwind.webp
+│   │   │   └── markdown.webp
+│   │   ├── projects/
+│   │   │   ├── enverdex_sandbox.webp
+│   │   │   ├── gp-regression.webp
+│   │   │   ├── neonmint.webp
+│   │   │   ├── prob_partial_pooling.webp
+│   │   │   └── senate-risk-trajectories.webp
+│   │   ├── blogimage.webp
+│   │   ├── enverdex_project_img.webp
+│   │   └── rfd-web-headshot.webp
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   └── site.webmanifest
+├── src/
+│   ├── components/
+│   │   ├── blog/
+│   │   │   ├── BlogPost.astro
+│   │   │   ├── DatePub.astro
+│   │   │   ├── Hero.astro
+│   │   │   ├── Languages.astro
+│   │   │   ├── LastPost.astro
+│   │   │   ├── ListPosts.astro
+│   │   │   └── Tags.astro
+│   │   ├── layout/
+│   │   │   ├── Footer.astro
+│   │   │   ├── Header.astro
+│   │   │   ├── NavArticle.astro
+│   │   │   ├── Navigation.astro
+│   │   │   └── NavigationArticles.astro
+│   │   ├── portfolio/
+│   │   │   ├── Contact.astro
+│   │   │   ├── Experience.astro
+│   │   │   ├── ExperienceItem.astro
+│   │   │   ├── HeroIndex.astro
+│   │   │   ├── Hobbie.astro
+│   │   │   ├── Hobbies.astro
+│   │   │   ├── ListProjects.astro
+│   │   │   ├── Project.astro
+│   │   │   └── Tools.astro
+│   │   ├── ui/
+│   │       ├── Button.astro
+│   │       ├── Capsule.astro
+│   │       ├── Heading.astro
+│   │       ├── ReadMore.astro
+│   │       ├── Share.astro
+│   │       ├── Social.astro
+│   │       ├── Tag.astro
+│   │       └── ThemeIcon.astro
+│   ├── content/
+│   │   ├── staticData/
+│   │   │   └── allStaticData.json
+│   │   └── config.ts
+│   ├── icons/
+│   │   ├── arrow-left.svg
+│   │   ├── astro.svg
+│   │   ├── aws.svg
+│   │   ├── bars.svg
+│   │   ├── briefcase.svg
+│   │   ├── code.svg
+│   │   ├── copilot.svg
+│   │   ├── css.svg
+│   │   ├── cursor-ia.svg
+│   │   ├── dashboard.svg
+│   │   ├── deephyper.svg
+│   │   ├── docker.svg
+│   │   ├── energyplus.svg
+│   │   ├── envelope.svg
+│   │   ├── facebook.svg
+│   │   ├── fastapi.svg
+│   │   ├── gcp.svg
+│   │   ├── git.svg
+│   │   ├── github-svg.svg
+│   │   ├── github.svg
+│   │   ├── html.svg
+│   │   ├── info.svg
+│   │   ├── javascript.svg
+│   │   ├── linkedin.svg
+│   │   ├── linux.svg
+│   │   ├── logo.svg
+│   │   ├── markdown.svg
+│   │   ├── md.svg
+│   │   ├── mongo.svg
+│   │   ├── moon.svg
+│   │   ├── node.svg
+│   │   ├── numpy.svg
+│   │   ├── openstudio.svg
+│   │   ├── pandas.svg
+│   │   ├── paperplane.svg
+│   │   ├── person.svg
+│   │   ├── php.svg
+│   │   ├── postgresql.svg
+│   │   ├── pymc.svg
+│   │   ├── python.svg
+│   │   ├── rocket.svg
+│   │   ├── ruby.svg
+│   │   ├── sass.svg
+│   │   ├── scikitlearn.svg
+│   │   ├── streamlit.svg
+│   │   ├── sun.svg
+│   │   ├── tailwind.svg
+│   │   ├── twitter.svg
+│   │   ├── typescript.svg
+│   │   ├── vercel.svg
+│   │   ├── whatsapp.svg
+│   │   ├── windsurf-logo.svg
+│   │   ├── wordpress.svg
+│   │   └── xmark.svg
+│   ├── layouts/
+│   │   ├── Layout.astro
+│   │   ├── MarkdownAbout.astro
+│   │   ├── MarkdownPostLayout.astro
+│   │   └── ProjectLayout.astro
+│   ├── pages/
+│   │   ├── blog/
+│   │   │   ├── posts/
+│   │   │   │   ├── discrete-time-hazard-toy-election-risk.md
+│   │   │   │   ├── gp-vs-svm-vs-ridge-sample-vs-compute.md
+│   │   │   │   ├── index.astro
+│   │   │   │   └── multilevel-models-probabilistic-overview.md
+│   │   │   ├── tags/
+│   │   │   │   ├── [tag].astro
+│   │   │   │   └── index.astro
+│   │   │   ├── techs/
+│   │   │   │   ├── [category].astro
+│   │   │   │   └── index.astro
+│   │   │   └── index.astro
+│   │   ├── now/
+│   │   │   └── index.astro
+│   │   ├── portfolio/
+│   │   │   ├── projects/
+│   │   │       ├── enverdex-praevion.md
+│   │   │       ├── gp-svm-ridge-efficiency.md
+│   │   │       ├── multilevel-models-probabilistic-overview.md
+│   │   │       └── senate-hazard-toy-example.md
+│   │   ├── 404.astro
+│   │   ├── about-me.md
+│   │   ├── index.astro
+│   │   ├── robots.txt.ts
+│   │   └── rss.xml.js
+│   ├── scripts/
+│   │   └── menu.js
+│   ├── styles/
+│   │   └── global.css
+│   ├── utils/
+│   │   └── languages.ts
+│   └── env.d.ts
+├── README.md
+├── astro.config.mjs
+├── directory-tree.txt
+├── package-lock.json
+├── package.json
+└── tsconfig.json

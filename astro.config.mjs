@@ -1,17 +1,35 @@
 // @ts-check
-
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import tailwindcss from "@tailwindcss/vite";
+import preact from "@astrojs/preact";
+import sitemap from "@astrojs/sitemap"
+import icon from "astro-icon";
 
-import tailwindcss from '@tailwindcss/vite';
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rfdonohue.io',
-  integrations: [mdx(), sitemap()],
+  site: "https://rfdonohue.io",
+  integrations: [
+    preact(),
+    icon(),
+    sitemap({
+      filter: (page) =>
+          !page.includes("/blog/tags") &&
+          !page.includes("/blog/techs"),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+    shikiConfig: {
+      theme: 'github-dark',
+    },
   },
 });

@@ -1,0 +1,53 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+import Heading from "../ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+
+const EXPERIENCE = [
+    {
+        date: "2025 - Present",
+        title: "Co-Founder & CTO",
+        company: "Enverdex, Inc.",
+        description:
+            "Building Praevion, a retrofit optimization platform that combines energy simulation (OpenStudio/EnergyPlus), multi-objective optimization, and Bayesian search to generate decision-ready decarbonization pathways and cost/carbon tradeoffs for buildings.",
+    },
+    {
+        date: "2022 - Present",
+        title: "Sustainability Innovation Lead",
+        company: "enviENERGY Studio",
+        description:
+            "I apply LCA and parametric energy modeling to balance operational and embodied carbon impacts, supporting balanced retrofit implementation. Additionally, I perform advanced compliance modeling and financial exposure analysis for multifamily portfolios under 2026 BPS regulatory deadlines",
+    },
+];
+---
+
+<section class="py-8 px-8 max-md:py-4 mb-4 scroll-m-16" id="experience">
+    <div class="flex flex-col pt-8 max-w-4xl mx-auto">
+        <div class="flex gap-4 items-center justify-center">
+            <Icon class="text-3xl dark:text-white text-blacktext" name="briefcase" />
+            <Heading text="Work" textGradient="Experience" level={2} />
+        </div>
+
+        <div class="relative max-md:mt-0 mt-8" aria-label="Professional experience">
+            <ol class="relative mt-10">
+                {
+                    EXPERIENCE.map((experience, index) => (
+                            <li>
+                                <article
+                                        role="article"
+                                        aria-labelledby={`experience-title-${index}`}
+                                >
+                                    <div
+                                            class="flex flex-col gap-2  text-zinc-00 dark:text-zinc-300 md:col-span-3"
+                                            aria-describedby={`experience-title-${index}`}
+                                    >
+                                        <ExperienceItem {...experience} />
+                                    </div>
+                                </article>
+                            </li>
+                    ))
+                }
+            </ol>
+        </div>
+    </div>
+</section>
