@@ -3,16 +3,22 @@ import Layout from "./Layout.astro";
 import DatePub from "../components/blog/DatePub.astro";
 import Tag from "../components/ui/Tag.astro";
 import Capsule from "../components/ui/Capsule.astro";
+import MetaCapsule from "../components/ui/MetaCapsule.astro";
 import NavArticle from "../components/layout/NavArticle.astro";
 import ListPosts from "../components/blog/ListPosts.astro";
 import NavigationArticles from "../components/layout/NavigationArticles.astro";
 import Share from "../components/ui/Share.astro";
-const { frontmatter } = Astro.props;
+const { frontmatter, rawContent } = Astro.props;
+
+// compute "X min read" from the markdown content
+const text = typeof rawContent === "function" ? await rawContent() : "";
+const minutes = readingTimeMinutes(text);
 const currentUrl = `${Astro.site}${Astro.url.pathname}`;
 const tweetText = encodeURIComponent(
     `"${frontmatter.title}" - by ${frontmatter.author} | Enverdex`
 );
 import Heading from "../components/ui/Heading.astro";
+import { readingTimeMinutes } from "../utils/readingTime";
 ---
 
 <script>
@@ -74,7 +80,7 @@ import Heading from "../components/ui/Heading.astro";
                 class="flex flex-col gap-8 max-w-3xl max-md:w-full pb-10 pt-8 mt-8 px-14 max-md:px-10 max-sm:px-4 dark:bg-transparent bg-white dark:border-0 border border-neutral-100 rounded-2xl"
         >
             <header class="flex flex-col gap-4" id="start">
-                <div class="flex gap-2 flex-wrap">
+                <div class="flex gap-2 flex-wrap items-center">
                     {
                         frontmatter.languages.map((language: string) => (
                                 <Capsule lang={language} />
@@ -91,22 +97,33 @@ import Heading from "../components/ui/Heading.astro";
                 <div
                         class="flex items-center max-sm:flex-col gap-2 max-sm:items-start justify-between"
                 >
-                    <div class="white flex items-center gap-4">
+                    <div class="white flex items-center gap-3">
                         <div
                                 aria-label="Photo of Robert Donohue (Enverdex) for the blog"
                                 class="size-10 bg-cover bg-center rounded-full drop-shadow-lg"
                                 style="background-image: url(/images/rfd-web-headshot.webp);"
-                        >
-                        </div>
+                        ></div>
+
                         <a
                                 id={frontmatter.title}
                                 class="leading-0 text-sm font-semibold items-center gap-3 text-blacktext dark:text-riptide-50"
                                 href="/blog/posts"
-                        >{frontmatter.author}
+                        >
+                            {frontmatter.author}
                         </a>
+
+                        <MetaCapsule text={`${minutes} min read`} />
                     </div>
                     <Share currentUrl={currentUrl} tweetText={tweetText} />
                 </div>
+
+                {
+                    frontmatter.lede && (
+                                <p class="text-lg leading-relaxed opacity-90 text-blacktext dark:text-zinc-100 whitespace-pre-line">
+                                    {frontmatter.lede}
+                                </p>
+                    )
+                }
             </header>
 
             <figure>

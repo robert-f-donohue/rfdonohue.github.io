@@ -22,6 +22,10 @@ export const languages: Record<string, Language> = {
         name: "scikit-learn",
         iconName: "scikitlearn",
     },
+    scipy: {
+        name: "SciPy",
+        iconName: "scipy",
+    },
     pymc: {
         name: "PyMC",
         iconName: "pymc",
