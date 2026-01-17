@@ -12,6 +12,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# draft pages
+src/pages/blog/drafts
+src/pages/portfolio/projects/drafts
+
 
 # environment variables
 .env

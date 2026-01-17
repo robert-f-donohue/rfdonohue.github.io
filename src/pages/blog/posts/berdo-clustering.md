@@ -194,7 +194,7 @@ more complex story.
 - **Historical Trends:** There is a certainly some correlation between construction era and efficiency at cluster medians (e.g. pre-1940 buildings are often found in the lower-efficiency clusters).
 - **The Power of Variability:** However, the year-built data shows **significant variability within individual clusters.**
 
-The proves that construction age is not the sole indicator of energy performance. A buildings "life," including
+This proves that construction age is not the sole indicator of energy performance. A buildings "life," including
 maintenance history and past retrofits, can matter as much as the year the foundation was poured.
 
 ---
